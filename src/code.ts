@@ -8,9 +8,10 @@ interface Args {
   scale: chroma.Scale
   localStyles: string
   name: string
+  close: boolean
 }
 
-figma.ui.onmessage = ({ type, colors, localStyles, name }: Args) => {
+figma.ui.onmessage = ({ type, colors, localStyles, name, close }: Args) => {
   if (type === 'create-scale') {
     const nodes = []
     for (let i = 0; i < colors.length; i++) {
@@ -31,5 +32,6 @@ figma.ui.onmessage = ({ type, colors, localStyles, name }: Args) => {
     }
     figma.currentPage.selection = nodes
     figma.viewport.scrollAndZoomIntoView(nodes)
+    if (close) figma.closePlugin()
   } else if (type === 'cancel') figma.closePlugin()
 }

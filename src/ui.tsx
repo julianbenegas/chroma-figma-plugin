@@ -21,7 +21,7 @@ const App = () => {
     colors: '',
     count: '5',
     localStyles: 'no',
-    name: undefined,
+    name: '',
     errors: {}
   })
   const [withLocalStyles, setWithLocalStyles] = React.useState(false)
@@ -38,7 +38,7 @@ const App = () => {
     setData({ ...data, [event.currentTarget.name]: event.currentTarget.value })
   }
 
-  const onCreate = () => {
+  const onCreate = ({ close }: { close: boolean }) => {
     // Validate
     let errorsObj: any = {}
     if (!data.colors.length) errorsObj.colors = "Can't be empty"
@@ -67,7 +67,8 @@ const App = () => {
             type: 'create-scale',
             colors,
             localStyles: data.localStyles,
-            name: data.name
+            name: data.name,
+            close
           }
         },
         '*'
@@ -142,9 +143,10 @@ const App = () => {
         />
         {data.errors.name && <div className="error">{data.errors.name}</div>}
       </div>
-      <button id="create" onClick={onCreate}>
-        Create
+      <button className="create" onClick={() => onCreate({ close: true })}>
+        Create and close
       </button>
+      <button onClick={() => onCreate({ close: false })}>Create</button>
       <button onClick={onCancel}>Cancel</button>
     </div>
   )
