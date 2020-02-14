@@ -85,7 +85,7 @@ const App = () => {
   return (
     <div>
       <div className="logo" />
-      <h2>Chroma Scale Creator</h2>
+      <h2>Chroma Scales</h2>
       {generalError && <p className="general-error">{generalError}</p>}
       <div className="input-container">
         <label htmlFor="colors">Colors (separated by commas)</label>
